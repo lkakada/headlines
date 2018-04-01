@@ -1,18 +1,116 @@
 <html>
 <head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 	<title>Headlines</title>
+	<!-- Bootstrap core CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+	<!-- Custom styles for this template -->
+	<link rel="stylesheet" type="text/css" href="static/css/business-frontpage.css">
 </head>
 <body>
-	<h1>Headlines</h1>
-	<form>
-		<input type="text" name="publication" placeholder="search" />
-		<input type="submit" value="Submit">
-	</form>
-	{%  for article in articles %}
-		<b><a href="{{article.link}}">{{ article.title }}</a></b><br/>
-		<i>{{ article.published }}</i><br/>
-		<p>{{ article.summary }}</p>
-		<hr>
-	{% endfor %}
+	<!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      	<div class="container" id="navbar-container">
+	        <a class="navbar-brand" href="{{ url_for('home') }}">FEED NEWS - {{ publication | upper() }}</a>
+	          	<form class="form-inline" id="headline-search">
+			    	<input class="form-control mr-sm-2" name="publication" type="search" placeholder="Search" aria-label="Search">
+			    	<button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+		  		</form>
+      	</div>
+    </nav>
+
+
+    <!-- Header with Background Image -->
+    <header class="business-header">
+    </header>
+
+    <!-- Page Content -->
+    <div class="container">
+
+      	<div class="row">
+	        <div class="col-md-8">
+	          	<h3 class="mt-4">Headlines</h3>
+	          	{% for article in articles %}
+	          	<b><a href="{{article.link}}">{{ article.title }}</a></b><br/>
+				<i>Post By: {{ article.published }}</i><br/>
+				<p>{{ article.summary }}</p>
+				<hr>
+				{% endfor %}
+        	</div>
+        <div class="col-md-4">
+          	<h5 class="mt-4">Current Weather</h5>
+          		<form>
+				  	<div class="row">
+				  		<div class="col">
+				  			<input type="text" class="form-control" name="city" placeholder="search">
+				  		</div>
+				  		<div class="col">
+				  			<button type="submit" class="btn btn-primary">Search</button>
+				  		</div>
+				  	</div>
+				</form>
+          	<p>City: {{weather.city}}, {{weather.country}} | {{weather.description}} | {{weather.temperature}}℃</p>
+
+          	<h5 class="mt-4">Currency</h5>
+          		<form>
+				  	<div class="row">
+				  		<div class="col">
+				  			from: 
+				  			<select class="custom-select" name="currency_from">
+					  			{% for currency in currencies %}
+					  			<option value="{{currency}}" {{'selected="selected"' if currency_from==currency}}>{{currency}}</option>
+					  			{% endfor %}
+				  			</select>
+				  		</div>
+				  		<div class="col">
+				  			to: 
+				  			<select class="custom-select" name="currency_to">
+					  			{% for currency in currencies %}
+					  			<option value="{{currency}}" {{'selected="selected"' if currency_to==currency}}>{{currency}}</option>
+					  			{% endfor %}
+				  			</select>
+				  		</div>
+				  		
+				  	</div>
+				  	<div class="row">
+				  		<div class="col" id="btn">
+				  			<button type="submit" class="btn btn-primary" id="convert">Convert</button>
+				  		</div>
+				  	</div>
+				</form>
+          	<p>1 {{currency_from}} = {{currency_to}} {{ "%.4f"|format(rate) }}</p>
+        </div>
+     </div>
+	<!-- Bootstrap core JavaScript -->
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
