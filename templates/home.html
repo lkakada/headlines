@@ -10,14 +10,24 @@
 
 	<!-- Custom styles for this template -->
 	<link rel="stylesheet" type="text/css" href="static/css/business-frontpage.css">
+	 <!--jquery core -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#load-more").click(function(){
+				alert('hello')
+			})
+		});
+	</script>
 	<!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       	<div class="container" id="navbar-container">
 	        <a class="navbar-brand" href="{{ url_for('home') }}">FEED NEWS - {{ publication | upper() }}</a>
 	          	<form class="form-inline" id="headline-search">
-			    	<input class="form-control mr-sm-2" name="publication" type="search" placeholder="Search" aria-label="Search">
+			    	<input class="form-control mr-sm-2" name="publication" type="search" placeholder="Channel" aria-label="Search">
 			    	<button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
 		  		</form>
       	</div>
@@ -40,6 +50,7 @@
 				<p>{{ article.summary }}</p>
 				<hr>
 				{% endfor %}
+				<button type="submit" class="btn btn-secondary" id="load-more">Load More</button>
         	</div>
         <div class="col-md-4">
           	<h5 class="mt-4">Current Weather</h5>
@@ -85,6 +96,9 @@
           	<p>1 {{currency_from}} = {{currency_to}} {{ "%.4f"|format(rate) }}</p>
         </div>
      </div>
+
+     <!--jquery core -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<!-- Bootstrap core JavaScript -->
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

@@ -18,6 +18,13 @@ DEFAULTS = {'publication':'bbc',
 WEATHER_URL = "http://api.openweathermap.org/data/2.5/weather?q={}&units=metric&appid=0594ad7b908fa1fd663849b7d2e8fccc"
 CURRENCY_URL = "https://openexchangerates.org//api/latest.json?app_id=4dc7285e20e64f5dbd4f9399bcd5472e"
 
+def sort_list(list_items, counter):
+	list_items_after_loop = []
+	i = 0
+	for i in range(counter):
+		list_items_after_loop.append(list_items[i])
+	return list_items_after_loop
+
 @app.route('/')
 def home():
 	# get customized headlines, based on user input or default
@@ -25,6 +32,11 @@ def home():
 	if not publication:
 		publication = DEFAULTS['publication']
 	articles = get_news(publication)
+	# displays = []
+	displays = sort_list(articles, 5)
+	# i=0
+	# for i in range(5):
+	# 	displays.append(articles[i])
 
 	# get customized weather based on user input or default
 	city = request.args.get('city')
@@ -41,7 +53,7 @@ def home():
 		currency_to = DEFAULTS['currency_to']
 	rate, currencies = get_rate(currency_from, currency_to)
 	
-	return render_template("home.html", articles=articles, weather=weather, currency_from=currency_from, currency_to=currency_to, rate=rate, currencies=sorted(currencies), publication=publication)
+	return render_template("home.html", articles=displays, weather=weather, currency_from=currency_from, currency_to=currency_to, rate=rate, currencies=sorted(currencies), publication=publication)
 
 def get_news(query):
 	if not query or query.lower() not in RSS_FEEDS:
